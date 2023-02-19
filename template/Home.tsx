@@ -26,7 +26,7 @@ export default function HomeTemplate({ challenges, users }: Props) {
     const address = await connectMetamask();
     if (address) {
       setConnected(true);
-      localStorage.setItem('address', address);
+      sessionStorage.setItem('wallet_address', address);
     }
   };
 
