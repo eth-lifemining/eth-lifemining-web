@@ -26,7 +26,7 @@
     "env-cmd": "^10.1.0",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
-    "ethers": "^6.0.4",
+    "ethers": "^5.7.2",
     "framer-motion": "^9.0.0",
     "next": "13.0.6",
     "petra-plugin-wallet-adapter": "^0.1.3",
