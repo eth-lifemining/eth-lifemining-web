@@ -31,7 +31,7 @@ export default function JoinCompleteTemplate() {
             <div className="challenge-fee">
               {fee}
               <AptosLogo />
-              <div className="typo-unit">APT</div>
+              <div className="typo-unit">ETH</div>
             </div>
             <div className="leader-profile">
               <LeaderProfile>

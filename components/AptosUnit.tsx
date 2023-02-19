@@ -16,7 +16,7 @@ export default function AptosUnit({ fee, color, fontSize }: Props) {
       <div className="aptos-fee">
         {fee}
         <AptosLogo color={color} />
-        <div className="typo-unit">APT</div>
+        <div className="typo-unit">ETH</div>
       </div>
     </Container>
   );

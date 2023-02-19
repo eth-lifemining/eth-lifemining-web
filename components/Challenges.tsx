@@ -41,7 +41,7 @@ export default function Challenges({ challenges, title }: Props) {
                 <div className="challenge-fee">
                   {challenge.stakingAPT}
                   <AptosLogo />
-                  <div className="typo-unit">APT</div>
+                  <div className="typo-unit">ETH</div>
                 </div>
                 <div className="leader-profile">
                   <LeaderProfile>

@@ -86,7 +86,7 @@ export default function NFTShopTemplate() {
                   <div className="challenge-fee">
                     2.00
                     <AptosLogo />
-                    <div className="typo-unit">APT</div>
+                    <div className="typo-unit">ETH</div>
                   </div>
                 </div>
               </ChallengeCard>

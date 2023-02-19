@@ -45,7 +45,7 @@ export default function SelectPriceTemplate() {
           />
           <div className="unit">
             <AptosLogo />
-            APT
+            ETH
           </div>
         </div>
         <div className="typo-estimate">

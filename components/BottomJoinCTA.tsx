@@ -101,7 +101,7 @@ export default function BottomJoinCTA({ challenge, totalRecord }: any) {
           <div className="join-fee">
             {challenge.stakingAPT}
             <AptosLogo />
-            <div className="typo-unit">APT</div>
+            <div className="typo-unit">ETH</div>
           </div>
           {!isJoined ? (
             <BorderButton

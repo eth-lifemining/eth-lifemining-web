@@ -73,7 +73,7 @@ export default function StakingTemplate() {
         <div className="price">
           2.50
           <AptosIcon />
-          <div style={{ fontSize: 24, fontWeight: 400 }}>APT</div>
+          <div style={{ fontSize: 24, fontWeight: 400 }}>ETH</div>
         </div>
         <div className="noti">Refund upon completion of staking</div>
         <div className="after-claim">2.80 APT</div>

@@ -43,7 +43,7 @@ export default function MintCompleteTemplate() {
           <div className="price">
             {mintData.nftPrice || '2.00'}
             <AptosLogo />
-            <div style={{ fontSize: 12 }}>APT</div>
+            <div style={{ fontSize: 12 }}>ETH</div>
           </div>
         </div>
       </ContentContainer>

@@ -134,7 +134,7 @@ export default function ChallengeDetailTemplate({ challenge }: { challenge: Chal
         <StakingInfo>
           <AptosUnit fee={challenge.stakingAPT} color="#3733FF" fontSize={24} />
           <div className="typo-description">
-            <span style={{ fontWeight: 700 }}>{(challenge.stakingAPT * 5) / 2} APT</span> refund
+            <span style={{ fontWeight: 700 }}>{(challenge.stakingAPT * 5) / 2} ETH</span> refund
             upon completion of staking{' '}
           </div>
         </StakingInfo>
