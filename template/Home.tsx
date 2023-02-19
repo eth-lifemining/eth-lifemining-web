@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { useWallet } from '@aptos-labs/wallet-adapter-react';
 import styled from 'styled-components';
 
 import BorderButton from '../components/BorderButton';
@@ -14,37 +13,22 @@ import Stories from '../components/Stories';
 import { Challenge } from '../entity/challenge';
 import { User } from '../entity/user';
 import Logo from '../public/svg/lifemining_logo.svg';
-
+import { connectMetamask } from '../util/connectWallet';
 interface Props {
   challenges: Challenge[];
   users: User[];
 }
 
 export default function HomeTemplate({ challenges, users }: Props) {
-  const { connect, account, connected, wallets } = useWallet();
-  const petraWallet = wallets[0];
+  const [connected, setConnected] = useState(false);
 
   const handleWalletConnect = async () => {
-    connect(petraWallet.name);
-  };
-
-  // A Web3Provider wraps a standard Web3 provider, which is
-  // what MetaMask injects as window.ethereum into each page
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-  // MetaMask requires requesting permission to connect users accounts
-  await provider.send('eth_requestAccounts', []);
-
-  // The MetaMask plugin also allows signing transactions to
-  // send ether and pay to change state within the blockchain.
-  // For this, you need the account signer...
-  const signer = provider.getSigner();
-
-  useEffect(() => {
-    if (connected) {
-      sessionStorage.setItem('wallet_address', account.address);
+    const address = await connectMetamask();
+    if (address) {
+      setConnected(true);
+      localStorage.setItem('address', address);
     }
-  }, [connected]);
+  };
 
   return (
     <DefaultLayout>
@@ -84,7 +68,7 @@ export default function HomeTemplate({ challenges, users }: Props) {
                   margin="31px 0 18px"
                   textSize={16}
                 >
-                  Connect the wallet
+                  Connect metamask wallet
                 </BorderButton>
               </div>
             </RegistrationContainer>
