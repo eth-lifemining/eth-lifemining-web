@@ -15,6 +15,7 @@ import ChallengeRepositoryImpl from '../repository/challenge';
 import UserRepositoryImpl from '../repository/user';
 import ChallengeUseCase from '../usecase/challenge';
 import UserUseCase from '../usecase/user';
+import { withraw } from '../util/signAndTransaction';
 
 export default function ProfileTemplate() {
   const {
@@ -78,17 +79,23 @@ export default function ProfileTemplate() {
       console.log('id >>>>>>> ', id);
 
       if (serverResponse && hostInfoResponse) {
-        // aptos join
-        const payload: Types.TransactionPayload = {
-          type: 'entry_function_payload',
-          function: `${process.env.NEXT_PUBLIC_CONTRACT_RESOURCE_ADDRESS}::Challenge::claim_for_challenge_reward`,
-          type_arguments: [],
-          arguments: [hostInfoResponse.creator.address, String(id)],
-        };
-        const response = await signAndSubmitTransaction(payload);
-        console.log(response);
-        // if you want to wait for transaction
-        await aptosClient.waitForTransaction(response?.hash || '');
+        // // aptos join
+        // const payload: Types.TransactionPayload = {
+        //   type: 'entry_function_payload',
+        //   function: `${process.env.NEXT_PUBLIC_CONTRACT_RESOURCE_ADDRESS}::Challenge::claim_for_challenge_reward`,
+        //   type_arguments: [],
+        //   arguments: [hostInfoResponse.creator.address, String(id)],
+        // };
+        // const response = await signAndSubmitTransaction(payload);
+        // console.log(response);
+        // // if you want to wait for transaction
+        // await aptosClient.waitForTransaction(response?.hash || '');
+        // if (response?.hash) {
+        //   getUser();
+        //   getRecords();
+        // }
+
+        const response = await withraw();
         if (response?.hash) {
           getUser();
           getRecords();

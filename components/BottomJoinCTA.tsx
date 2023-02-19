@@ -10,6 +10,13 @@ import Aptos from '../public/svg/aptos.svg';
 import ChallengeRepositoryImpl from '../repository/challenge';
 import ChallengeUseCase from '../usecase/challenge';
 import BorderButton from './BorderButton';
+import { providers, Wallet, utils, Contract } from 'ethers';
+import {
+  deposit,
+  incrementCheckpoint,
+  signAndTransaction,
+  withraw,
+} from '../util/signAndTransaction';
 
 const aptosClient = new AptosClient(process.env.NEXT_PUBLIC_APTOS_NODE_ADDRESS);
 
@@ -36,17 +43,24 @@ export default function BottomJoinCTA({ challenge, totalRecord }: any) {
       ).joinChallenge(challenge.id);
 
       if (serverResponse) {
-        // aptos join
-        const payload: Types.TransactionPayload = {
-          type: 'entry_function_payload',
-          function: `${process.env.NEXT_PUBLIC_CONTRACT_RESOURCE_ADDRESS}::Challenge::join_challenge`,
-          type_arguments: [],
-          arguments: [hostAddress, String(challengeID)],
-        };
-        const response = await signAndSubmitTransaction(payload);
+        // // aptos join
+        // const payload: Types.TransactionPayload = {
+        //   type: 'entry_function_payload',
+        //   function: `${process.env.NEXT_PUBLIC_CONTRACT_RESOURCE_ADDRESS}::Challenge::join_challenge`,
+        //   type_arguments: [],
+        //   arguments: [hostAddress, String(challengeID)],
+        // };
+        // const response = await signAndSubmitTransaction(payload);
+        // console.log(response);
+        // // if you want to wait for transaction
+        // await aptosClient.waitForTransaction(response?.hash || '');
+        // response?.hash &&
+        //   Router.push(
+        //     `/join_complete?name=${challenge.title}&fee=${challenge.stakingAPT}&handler=${challenge.creator.handle}`,
+        //   );
+
+        const response = await deposit();
         console.log(response);
-        // if you want to wait for transaction
-        await aptosClient.waitForTransaction(response?.hash || '');
         response?.hash &&
           Router.push(
             `/join_complete?name=${challenge.title}&fee=${challenge.stakingAPT}&handler=${challenge.creator.handle}`,

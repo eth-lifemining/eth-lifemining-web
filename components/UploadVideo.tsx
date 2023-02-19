@@ -15,6 +15,7 @@ import BorderButton from './BorderButton';
 import DefaultLayout from './DefaultLayout';
 import HeaderNavigation from './HeaderNavigation';
 import Video from './Video';
+import { incrementCheckpoint } from '../util/signAndTransaction';
 
 export default function UploadVideo() {
   const { signAndSubmitTransaction } = useWallet();
@@ -48,17 +49,20 @@ export default function UploadVideo() {
       ).uploadVideo(formData, router.query.challengeID as string);
 
       if (serverResponse) {
-        // aptos join
-        const payload: Types.TransactionPayload = {
-          type: 'entry_function_payload',
-          function: `${process.env.NEXT_PUBLIC_CONTRACT_RESOURCE_ADDRESS}::Challenge::submit_daily_checkpoint`,
-          type_arguments: [],
-          arguments: [hostAddress, String(challengeID), 2],
-        };
-        const response = await signAndSubmitTransaction(payload);
-        console.log(response);
-        // if you want to wait for transaction
-        await aptosClient.waitForTransaction(response?.hash || '');
+        // // aptos join
+        // const payload: Types.TransactionPayload = {
+        //   type: 'entry_function_payload',
+        //   function: `${process.env.NEXT_PUBLIC_CONTRACT_RESOURCE_ADDRESS}::Challenge::submit_daily_checkpoint`,
+        //   type_arguments: [],
+        //   arguments: [hostAddress, String(challengeID), 2],
+        // };
+        // const response = await signAndSubmitTransaction(payload);
+        // console.log(response);
+        // // if you want to wait for transaction
+        // await aptosClient.waitForTransaction(response?.hash || '');
+        // response?.hash && serverResponse && router.push('/video/upload_complete');
+
+        const response = await incrementCheckpoint();
         response?.hash && serverResponse && router.push('/video/upload_complete');
       }
     } catch (err) {
